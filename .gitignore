@@ -1,0 +1,31 @@
+## ============================================================
+## .gitignore padrão para projetos ASP.NET Core / .NET
+## ============================================================
+
+# Diretórios de build
+bin/
+obj/
+
+# Banco de dados SQLite (gerado localmente pelo EF Core)
+*.db
+*.db-shm
+*.db-wal
+
+# Arquivos de configuração de usuário (segredos locais)
+*.user
+*.suo
+.vs/
+
+# Variáveis de ambiente locais
+.env
+.env.local
+
+# Logs
+*.log
+
+# Arquivos temporários do sistema
+Thumbs.db
+.DS_Store
+
+# Publicação
+publish/
