@@ -21,9 +21,9 @@ namespace ProjetoAPI.Models
 
         public int TurmaId { get; set; }
 
-        public virtual Turma Turma { get; set; }
+        public virtual Turma? Turma { get; set; }
 
-        public virtual ICollection<Ocorrencia> Ocorrencias { get; set; }
+        public virtual ICollection<Ocorrencia>? Ocorrencias { get; set; }
 
         public Aluno() { }
     }

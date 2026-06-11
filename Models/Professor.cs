@@ -19,9 +19,8 @@ namespace ProjetoAPI.Models
         [MaxLength(20)]
         public string Matricula { get; set; }
 
-        // Propriedade de navegação: 1 Professor -> N Ocorrencias
-        public virtual ICollection<Ocorrencia> Ocorrencias { get; set; }
+        public virtual ICollection<Ocorrencia>? Ocorrencias { get; set; }
 
-        public Professor() { } // Construtor exigido pelo EF
+        public Professor() { }
     }
 }

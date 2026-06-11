@@ -1,0 +1,539 @@
+{
+  "info": {
+    "_postman_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+    "name": "API Ocorrências Escolares",
+    "description": "Coleção de testes para a API RESTful de gerenciamento de ocorrências disciplinares. Sprint 2 — CRUD completo das 5 entidades.\n\nBase URL: http://localhost:5000",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Turmas",
+      "description": "CRUD completo da entidade Turma.",
+      "item": [
+        {
+          "name": "GET - Listar todas as Turmas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/turmas",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "turmas"]
+            },
+            "description": "Retorna a lista completa de turmas com os alunos atrelados. Esperado: 200 OK."
+          }
+        },
+        {
+          "name": "GET - Buscar Turma por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/turmas/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "turmas", "1"]
+            },
+            "description": "Retorna a turma com Id=1. Esperado: 200 OK. Se não existir: 404 Not Found."
+          }
+        },
+        {
+          "name": "POST - Criar nova Turma",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"2º Ano A - EE. Prof Theodorico de Oliveira\",\n  \"anoLetivo\": 2026,\n  \"turno\": \"Tarde\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/turmas",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "turmas"]
+            },
+            "description": "Cria uma nova turma. Esperado: 201 Created com o objeto criado no body."
+          }
+        },
+        {
+          "name": "PUT - Atualizar Turma",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 1,\n  \"nome\": \"3º Ano - EE. Prof Theodorico de Oliveira\",\n  \"anoLetivo\": 2026,\n  \"turno\": \"Manhã\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/turmas/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "turmas", "1"]
+            },
+            "description": "Atualiza a turma com Id=1. O campo 'id' no body deve ser igual ao da URL. Esperado: 204 No Content."
+          }
+        },
+        {
+          "name": "DELETE - Remover Turma",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/turmas/2",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "turmas", "2"]
+            },
+            "description": "Remove a turma com Id=2. Esperado: 204 No Content. Se não existir: 404 Not Found."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Alunos",
+      "description": "CRUD completo da entidade Aluno (inclui dados da Turma nos GETs).",
+      "item": [
+        {
+          "name": "GET - Listar todos os Alunos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/alunos",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "alunos"]
+            },
+            "description": "Retorna todos os alunos com os dados da Turma aninhados. Esperado: 200 OK."
+          }
+        },
+        {
+          "name": "GET - Buscar Aluno por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/alunos/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "alunos", "1"]
+            },
+            "description": "Retorna o aluno com Id=1 (Vinícius) com os dados da Turma. Esperado: 200 OK."
+          }
+        },
+        {
+          "name": "POST - Criar novo Aluno",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"registroAluno\": \"RA1005\",\n  \"nome\": \"Gabriel Santos\",\n  \"contatoResponsavel\": \"11999990005\",\n  \"turmaId\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/alunos",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "alunos"]
+            },
+            "description": "Cria um novo aluno vinculado à Turma Id=1. Esperado: 201 Created."
+          }
+        },
+        {
+          "name": "PUT - Atualizar Aluno",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 1,\n  \"registroAluno\": \"RA1001\",\n  \"nome\": \"Vinícius Atualizado\",\n  \"contatoResponsavel\": \"11988880001\",\n  \"turmaId\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/alunos/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "alunos", "1"]
+            },
+            "description": "Atualiza o aluno com Id=1. Esperado: 204 No Content."
+          }
+        },
+        {
+          "name": "DELETE - Remover Aluno",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/alunos/4",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "alunos", "4"]
+            },
+            "description": "Remove o aluno com Id=4 (Luiz Felipe). Esperado: 204 No Content."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Professores",
+      "description": "CRUD completo da entidade Professor.",
+      "item": [
+        {
+          "name": "GET - Listar todos os Professores",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/professores",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "professores"]
+            },
+            "description": "Retorna todos os professores com as ocorrências relacionadas. Esperado: 200 OK."
+          }
+        },
+        {
+          "name": "GET - Buscar Professor por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/professores/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "professores", "1"]
+            },
+            "description": "Retorna o Prof. Carlos Silva (Id=1). Esperado: 200 OK."
+          }
+        },
+        {
+          "name": "POST - Criar novo Professor",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Prof. Ricardo Lima\",\n  \"disciplina\": \"Educação Física\",\n  \"matricula\": \"EDF004\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/professores",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "professores"]
+            },
+            "description": "Cria um novo professor. Esperado: 201 Created."
+          }
+        },
+        {
+          "name": "PUT - Atualizar Professor",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 1,\n  \"nome\": \"Prof. Carlos Silva\",\n  \"disciplina\": \"Matemática e Física\",\n  \"matricula\": \"MAT001\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/professores/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "professores", "1"]
+            },
+            "description": "Atualiza o professor com Id=1. Esperado: 204 No Content."
+          }
+        },
+        {
+          "name": "DELETE - Remover Professor",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/professores/3",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "professores", "3"]
+            },
+            "description": "Remove o Prof. Marcos Pereira (Id=3). Esperado: 204 No Content."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Motivos de Infração",
+      "description": "CRUD completo da entidade MotivoInfracao.",
+      "item": [
+        {
+          "name": "GET - Listar todos os Motivos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/motivosinfracao",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "motivosinfracao"]
+            },
+            "description": "Retorna os 5 motivos de infração cadastrados no seed. Esperado: 200 OK."
+          }
+        },
+        {
+          "name": "GET - Buscar Motivo por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/motivosinfracao/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "motivosinfracao", "1"]
+            },
+            "description": "Retorna o motivo 'Uso de celular em sala de aula' (Id=1). Esperado: 200 OK."
+          }
+        },
+        {
+          "name": "POST - Criar novo Motivo",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"descricao\": \"Saída não autorizada da sala de aula\",\n  \"gravidade\": \"Médio\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/motivosinfracao",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "motivosinfracao"]
+            },
+            "description": "Cria um novo motivo de infração. Esperado: 201 Created."
+          }
+        },
+        {
+          "name": "PUT - Atualizar Motivo",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 5,\n  \"descricao\": \"Perturbação do andamento da aula com barulho excessivo\",\n  \"gravidade\": \"Médio\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/motivosinfracao/5",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "motivosinfracao", "5"]
+            },
+            "description": "Atualiza o motivo com Id=5. Esperado: 204 No Content."
+          }
+        },
+        {
+          "name": "DELETE - Remover Motivo",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/motivosinfracao/5",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "motivosinfracao", "5"]
+            },
+            "description": "Remove o motivo com Id=5. Esperado: 204 No Content."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Ocorrências",
+      "description": "CRUD completo da entidade Ocorrencia — coração do sistema. Os GETs retornam Aluno (com Turma), Professor e MotivoInfracao completos.",
+      "item": [
+        {
+          "name": "GET - Listar todas as Ocorrências",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/ocorrencias",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "ocorrencias"]
+            },
+            "description": "Retorna todas as ocorrências com Aluno (+ Turma), Professor e MotivoInfracao resolvidos. Esperado: 200 OK."
+          }
+        },
+        {
+          "name": "GET - Buscar Ocorrência por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/ocorrencias/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "ocorrencias", "1"]
+            },
+            "description": "Retorna a ocorrência com Id=1 com todos os dados relacionados. Esperado: 200 OK."
+          }
+        },
+        {
+          "name": "POST - Registrar nova Ocorrência",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dataOcorrencia\": \"2026-06-09T10:30:00\",\n  \"observacao\": \"Aluno utilizou o celular durante a explicação do conteúdo de Matemática, mesmo após advertência verbal do professor.\",\n  \"status\": \"Aberta\",\n  \"alunoId\": 1,\n  \"professorId\": 1,\n  \"motivoInfracaoId\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/ocorrencias",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "ocorrencias"]
+            },
+            "description": "Registra uma nova ocorrência. O campo 'dataRegistro' é preenchido automaticamente pelo servidor. Esperado: 201 Created.\n\nFKs usadas neste exemplo:\n- alunoId: 1 (Vinícius)\n- professorId: 1 (Prof. Carlos Silva)\n- motivoInfracaoId: 1 (Uso de celular)"
+          }
+        },
+        {
+          "name": "POST - Registrar Ocorrência de Briga",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"dataOcorrencia\": \"2026-06-09T14:00:00\",\n  \"observacao\": \"Aluno envolveu-se em briga com colega durante o intervalo. Encaminhado à diretoria.\",\n  \"status\": \"Em Análise\",\n  \"alunoId\": 2,\n  \"professorId\": 2,\n  \"motivoInfracaoId\": 3\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/ocorrencias",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "ocorrencias"]
+            },
+            "description": "Exemplo alternativo de ocorrência grave.\n\nFKs usadas:\n- alunoId: 2 (Julio)\n- professorId: 2 (Profa. Ana Souza)\n- motivoInfracaoId: 3 (Briga com colega)"
+          }
+        },
+        {
+          "name": "PUT - Atualizar Status de Ocorrência",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": 1,\n  \"dataOcorrencia\": \"2026-06-09T10:30:00\",\n  \"dataRegistro\": \"2026-06-09T10:35:00\",\n  \"observacao\": \"Aluno utilizou o celular durante a aula. Pais foram comunicados e assinaram o termo de ciência.\",\n  \"status\": \"Resolvida\",\n  \"alunoId\": 1,\n  \"professorId\": 1,\n  \"motivoInfracaoId\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/ocorrencias/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "ocorrencias", "1"]
+            },
+            "description": "Atualiza a ocorrência Id=1, alterando o Status para 'Resolvida' e complementando a Observação. Esperado: 204 No Content."
+          }
+        },
+        {
+          "name": "DELETE - Remover Ocorrência",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/ocorrencias/1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "ocorrencias", "1"]
+            },
+            "description": "Remove a ocorrência com Id=1. Esperado: 204 No Content. Se não existir: 404 Not Found."
+          }
+        }
+      ]
+    }
+  ]
+}

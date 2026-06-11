@@ -16,33 +16,25 @@ namespace ProjetoAPI.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // ==================== RELACIONAMENTOS (Fluent API) ====================
-
-            // Ocorrencia -> Aluno (N:1)
             modelBuilder.Entity<Ocorrencia>()
                 .HasOne(o => o.Aluno)
                 .WithMany(a => a.Ocorrencias)
                 .HasForeignKey(o => o.AlunoId);
 
-            // Ocorrencia -> Professor (N:1)
             modelBuilder.Entity<Ocorrencia>()
                 .HasOne(o => o.Professor)
                 .WithMany(p => p.Ocorrencias)
                 .HasForeignKey(o => o.ProfessorId);
 
-            // Ocorrencia -> MotivoInfracao (N:1)
             modelBuilder.Entity<Ocorrencia>()
                 .HasOne(o => o.MotivoInfracao)
                 .WithMany(m => m.Ocorrencias)
                 .HasForeignKey(o => o.MotivoInfracaoId);
 
-            // Aluno -> Turma (N:1)
             modelBuilder.Entity<Aluno>()
                 .HasOne(a => a.Turma)
                 .WithMany(t => t.Alunos)
                 .HasForeignKey(a => a.TurmaId);
-
-            // ==================== SEED DE DADOS INICIAIS ====================
 
             modelBuilder.Entity<Turma>().HasData(
                 new Turma
@@ -68,11 +60,11 @@ namespace ProjetoAPI.Data
             );
 
             modelBuilder.Entity<MotivoInfracao>().HasData(
-                new MotivoInfracao { Id = 1, Descricao = "Uso de celular em sala de aula",            Gravidade = "Leve"   },
-                new MotivoInfracao { Id = 2, Descricao = "Desrespeito ao professor",                  Gravidade = "Grave"  },
-                new MotivoInfracao { Id = 3, Descricao = "Briga com colega",                          Gravidade = "Grave"  },
-                new MotivoInfracao { Id = 4, Descricao = "Atraso recorrente sem justificativa",       Gravidade = "Médio"  },
-                new MotivoInfracao { Id = 5, Descricao = "Perturbação do andamento da aula",          Gravidade = "Leve"   }
+                new MotivoInfracao { Id = 1, Descricao = "Uso de celular em sala de aula",            Gravidade = "Leve"  },
+                new MotivoInfracao { Id = 2, Descricao = "Desrespeito ao professor",                  Gravidade = "Grave" },
+                new MotivoInfracao { Id = 3, Descricao = "Briga com colega",                          Gravidade = "Grave" },
+                new MotivoInfracao { Id = 4, Descricao = "Atraso recorrente sem justificativa",       Gravidade = "Médio" },
+                new MotivoInfracao { Id = 5, Descricao = "Perturbação do andamento da aula",          Gravidade = "Leve"  }
             );
         }
     }

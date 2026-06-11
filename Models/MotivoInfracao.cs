@@ -15,9 +15,8 @@ namespace ProjetoAPI.Models
         [MaxLength(20)]
         public string Gravidade { get; set; }
 
-        // Propriedade de navegação: 1 MotivoInfracao -> N Ocorrencias
-        public virtual ICollection<Ocorrencia> Ocorrencias { get; set; }
+        public virtual ICollection<Ocorrencia>? Ocorrencias { get; set; }
 
-        public MotivoInfracao() { } // Construtor exigido pelo EF
+        public MotivoInfracao() { }
     }
 }

@@ -18,9 +18,8 @@ namespace ProjetoAPI.Models
         [MaxLength(20)]
         public string Turno { get; set; }
 
-        // Propriedade de navegação: 1 Turma -> N Alunos
-        public virtual ICollection<Aluno> Alunos { get; set; }
+        public virtual ICollection<Aluno>? Alunos { get; set; }
 
-        public Turma() { } // Construtor exigido pelo EF
+        public Turma() { }
     }
 }
