@@ -49,6 +49,18 @@ namespace ProjetoAPI.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
+            bool alunoExiste = await _context.Alunos.AnyAsync(a => a.Id == ocorrencia.AlunoId);
+            if (!alunoExiste)
+                return NotFound("Aluno informado não encontrado.");
+
+            bool professorExiste = await _context.Professores.AnyAsync(p => p.Id == ocorrencia.ProfessorId);
+            if (!professorExiste)
+                return NotFound("Professor informado não encontrado.");
+
+            bool motivoExiste = await _context.MotivosInfracao.AnyAsync(m => m.Id == ocorrencia.MotivoInfracaoId);
+            if (!motivoExiste)
+                return NotFound("Motivo de infração informado não encontrado.");
+
             try
             {
                 ocorrencia.DataRegistro = DateTime.Now;

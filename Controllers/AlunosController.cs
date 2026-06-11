@@ -43,6 +43,10 @@ namespace ProjetoAPI.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
+            bool turmaExiste = await _context.Turmas.AnyAsync(t => t.Id == aluno.TurmaId);
+            if (!turmaExiste)
+                return NotFound("Turma informada não encontrada.");
+
             try
             {
                 _context.Alunos.Add(aluno);
